@@ -1,9 +1,17 @@
 {
-  "type": "digitalocean",
-  "droplet_name": "as",
-  "image": "",
-  "size": "512mb",
-  "region": "sfo1",
+
+  "variables": {
+    "do_api_token": "{{env `DIGITALOCEAN_API_TOKEN`}}"
+  },
+
+  "builders": [{
+    "type": "digitalocean",
+    "api_token": "{{user `do_api_token`}}",
+    "droplet_name": "as",
+    "image": "centos-7-0-x64",
+    "size": "512mb",
+    "region": "sfo1"
+  }],
 
   "provisioners": [{
     "type": "shell",
@@ -14,6 +22,7 @@
       "sudo yum install -y nginx"
     ]
   }]
+
 }
 
 
